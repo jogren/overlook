@@ -37,7 +37,7 @@ class Hotel {
     let roomServicesTotal = this.filterItemsBySpecificDate(date, 'roomServices').reduce((acc, item) => { 
       return acc += item.totalCost;
     }, 0);
-    return this.filterItemsBySpecificDate(date, 'bookings').reduce((acc, booking) => {
+    let totalRevenue = this.filterItemsBySpecificDate(date, 'bookings').reduce((acc, booking) => {
         this.rooms.forEach(room => {
           if (booking.roomNumber === room.number) {
             acc += room.costPerNight;
@@ -45,10 +45,11 @@ class Hotel {
         })
         return acc;
     }, 0) + roomServicesTotal;
+    return Number(totalRevenue.toFixed(2));
   }
 
   findCustomer(name) {
-    let targetUser = this.users.find(user => user.name == name);
+    let targetUser = this.users.find(user => user.name.toLowerCase() == name.toLowerCase());
     if(targetUser) {
       let targetBookings = this.findTargetCustomerInfo('bookings', targetUser);
       let targetRoomServices = this.findTargetCustomerInfo('roomServices', targetUser);
@@ -64,6 +65,24 @@ class Hotel {
     this.users.push({ id: newId, name: name });
     this.currentCustomer = new Customer(name, newId, [], [], this.today)
     domUpdates.displayCurrentCustomer(this.currentCustomer.name);
+  }
+
+  findMostAndLeastPopularBookingDate(popularity) {
+    let bookingObj = this.bookings.reduce((acc, booking) => {
+      if(!acc[booking.date]) {
+        acc[booking.date] = 1
+      } else {
+        acc[booking.date]++;
+      }
+      return acc;
+    }, {});
+    return Object.keys(bookingObj).reduce((acc, key) => {
+      if(popularity === 'high') {
+        return bookingObj[acc] > bookingObj[key] ? acc : key
+      } else if(popularity === 'low') {
+        return bookingObj[acc] < bookingObj[key] ? acc : key
+      }
+    })
   }
 
   findCurrentDate() {

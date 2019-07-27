@@ -63,4 +63,14 @@ describe('Hotel', () => {
       expect(hotel.currentCustomer.name).to.equal('John Doe');
     })
   });
+
+  describe('findMostAndLeastPopularBookingDate', () => {
+    it('should find the most popular booking date', () => {
+      expect(hotel.findMostAndLeastPopularBookingDate('high')).to.equal('2019/09/25');
+    })
+
+    it('should find the date with the most rooms available', () => {
+      expect(hotel.findMostAndLeastPopularBookingDate('low')).to.equal('2019/09/27');
+    })
+  });
 });

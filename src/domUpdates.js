@@ -25,7 +25,7 @@ let domUpdates = {
 
   showMainPageContent(hotel) {
     $('#main-total-revenue').text(`$ ${hotel.calculateTotalRevenueByDate(this.displayCurrentDate())}`);
-    $('#main-occupied-rooms').text(`% ${hotel.returnPercentRoomsOccupiedByDate(this.displayCurrentDate())}`)
+    $('#main-occupied-rooms').text(`${hotel.returnPercentRoomsOccupiedByDate(this.displayCurrentDate())}%`)
     $('#main-available-rooms').text(hotel.returnTotalNumberOfUnoccupiedRoomsByDate(this.displayCurrentDate()))
   },
 
