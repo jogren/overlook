@@ -1,23 +1,17 @@
-import Customer from './Customer';
 import domUpdates from './domUpdates';
 
 class Hotel {
-  constructor(allData) {
-    this.users = allData.users;
-    this.roomServices = allData.roomServices;
-    this.bookings = allData.bookings;
-    this.rooms = allData.rooms;
-    this.today = this.findCurrentDate();
-    this.currentCustomer;
+  constructor(users, roomServices, bookings, rooms, today) {
+    this.users = users;
+    this.roomServices = roomServices;
+    this.bookings = bookings;
+    this.rooms = rooms;
+    this.today = today;
     this.availableRooms = this.returnRoomsUnoccupiedByDate(this.today);
   }
 
   filterItemsBySpecificDate(date, property) {
     return this[property].filter(item => item.date === date);
-  }
-
-  findTargetCustomerInfo(property, targetUser) {
-    return this[property].filter(item => item.userID === targetUser.id);
   }
 
   returnPercentRoomsOccupiedByDate(date) {
@@ -48,25 +42,6 @@ class Hotel {
     return Number(totalRevenue.toFixed(2));
   }
 
-  findCustomer(name) {
-    let targetUser = this.users.find(user => user.name.toLowerCase() == name.toLowerCase());
-    if(targetUser) {
-      let targetBookings = this.findTargetCustomerInfo('bookings', targetUser);
-      let targetRoomServices = this.findTargetCustomerInfo('roomServices', targetUser);
-      this.currentCustomer = new Customer(targetUser.name, targetUser.id, targetBookings, targetRoomServices, this.findCurrentDate());
-      domUpdates.displayCurrentCustomer(targetUser.name);
-    } else {
-      domUpdates.showErrorMessage(name);
-    }
-  }
-
-  createCustomer(name) {
-    let newId = this.users.length + 1;
-    this.users.push({ id: newId, name: name });
-    this.currentCustomer = new Customer(name, newId, [], [], this.today)
-    domUpdates.displayCurrentCustomer(this.currentCustomer.name);
-  }
-
   findMostAndLeastPopularBookingDate(popularity) {
     let bookingObj = this.bookings.reduce((acc, booking) => {
       if(!acc[booking.date]) {
@@ -85,13 +60,11 @@ class Hotel {
     })
   }
 
-  findCurrentDate() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1).padStart(2, '0');
-    let yyyy = today.getFullYear();
-    today = `${yyyy}/${mm}/${dd}`
-    return today;
+  returnAllRoomServiceOrdersByDate(date) {
+    let targetRoomServiceObjects = this.filterItemsBySpecificDate(date, 'roomServices');
+    return targetRoomServiceObjects.map(obj => {
+      return { food: obj.food, cost: obj.totalCost }
+    })
   }
 }
 

@@ -5,6 +5,7 @@
 import $ from 'jquery';
 import Hotel from './Hotel';
 import domUpdates from './domUpdates'
+import Admin from './Admin';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
@@ -19,7 +20,7 @@ let rooms = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/room
 let bookings = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings').then(response => response.json());
 let roomServices = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/room-services/roomServices').then(response => response.json());
 
-let hotel;
+let admin;
 let allData = {'users': {}, 'roomServices': {}, 'bookings': {}, 'rooms': {}}
 Promise.all([users, roomServices, bookings, rooms])
   .then(values => {
@@ -27,9 +28,9 @@ Promise.all([users, roomServices, bookings, rooms])
     allData['roomServices'] = values[1].roomServices;
     allData['bookings'] = values[2].bookings;
     allData['rooms'] = values[3].rooms;
-    hotel = new Hotel(allData)
-    console.log(hotel)
-    domUpdates.displayPageOnLoad(hotel);
+    admin = new Admin(allData)
+    console.log(admin)
+    domUpdates.displayPageOnLoad(admin.currentHotel);
   })
   .catch(error => console.log(`Error in promises ${error}`));
 
@@ -52,12 +53,12 @@ $('#tab-rooms').on('click', () => {
 });
 
 $('#button-search-customer').on('click', () => {
-  hotel.findCustomer($('#input-search-customer').val());
+  admin.findCustomer($('#input-search-customer').val());
   $('#input-search-customer').val('')
 })
 
 $('#button-create-customer').on('click', () => {
-  hotel.createCustomer($('#input-create-customer').val());
+  admin.createCustomer($('#input-create-customer').val());
   $('#input-create-customer').val('')
 })
 

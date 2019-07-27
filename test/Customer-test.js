@@ -1,4 +1,4 @@
-import Hotel from '../src/Hotel.js';
+import Admin from '../src/Admin.js';
 import Customer from '../src/Customer.js';
 import users from '../data/sampleUserData.js';
 import roomServices from '../data/sampleRoomServiceData.js';
@@ -10,12 +10,12 @@ const expect = chai.expect;
 import spies from 'chai-spies';
 chai.use(spies);
 
-let hotel;
+let admin;
 
   chai.spy.on(domUpdates, ['displayCurrentCustomer', 'showErrorMessage'], () => {});
 beforeEach(() => {
-  hotel = new Hotel({users, roomServices, bookings, rooms});
-  hotel.findCustomer('Matilde Larson')
+  admin = new Admin({users, roomServices, bookings, rooms});
+  admin.findCustomer('Matilde Larson')
 });
 
 describe('Customer', () => {
@@ -25,7 +25,7 @@ describe('Customer', () => {
 
   describe('roomServicesBreakdown', () => {
     it('should return a breakdown of the customer\'s room services history', () => {
-      expect(hotel.currentCustomer.roomServicesBreakdown()).to.eql([
+      expect(admin.currentCustomer.roomServicesBreakdown()).to.eql([
         {
           date: '2019/09/25',
           totalCost: 14.9
@@ -44,30 +44,30 @@ describe('Customer', () => {
 
   describe('totalRoomServiceDebtByDate', () => {
     it('should return the total room service bill by specified date', () => {
-      expect(hotel.currentCustomer.totalRoomServiceDebtByDate('2019/09/25')).to.equal(26.05)
+      expect(admin.currentCustomer.totalRoomServiceDebtByDate('2019/09/25')).to.equal(26.05)
     })
   });
 
   describe('allTimeRoomServiceDebt', () => {
     it('should return the customer\'s all time total room service bill', () => {
-      expect(hotel.currentCustomer.allTimeRoomServiceDebt()).to.equal(43.38)
+      expect(admin.currentCustomer.allTimeRoomServiceDebt()).to.equal(43.38)
     })
   });
 
   describe('validateCustomer', () => {
     it('should validate a customer if they have booking and room service data', () => {
-      expect(hotel.currentCustomer.validateCustomer()).to.equal(true)
+      expect(admin.currentCustomer.validateCustomer()).to.equal(true)
     })
 
     it('should not validate a customer if they do not have booking or room service data', () => {
-      hotel.findCustomer('Brook Christiansen')
-      expect(hotel.currentCustomer.validateCustomer()).to.equal(false)
+      admin.findCustomer('Brook Christiansen')
+      expect(admin.currentCustomer.validateCustomer()).to.equal(false)
     })
   });
 
   describe('sortCustomerBookingHistory', () => {
     it.skip('should sort a customer\'s booking history', () => {
-      expect(hotel.currentCustomer.sortCustomerBookingHistory()).to.eql([
+      expect(admin.currentCustomer.sortCustomerBookingHistory()).to.eql([
     { userID: 1, date: '2019/09/01', roomNumber: 41 },
     { userID: 1, date: '2019/10/19', roomNumber: 5 },
     { userID: 1, date: '2019/10/30', roomNumber: 35 }
