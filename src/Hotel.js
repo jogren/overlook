@@ -1,4 +1,5 @@
 import Customer from './Customer';
+import domUpdates from './domUpdates';
 
 class Hotel {
   constructor(allData) {
@@ -6,8 +7,9 @@ class Hotel {
     this.roomServices = allData.roomServices;
     this.bookings = allData.bookings;
     this.rooms = allData.rooms;
-    this.today
+    this.today = this.findCurrentDate();
     this.currentCustomer;
+    this.availableRooms = this.returnRoomsUnoccupiedByDate(this.today);
   }
 
   filterItemsBySpecificDate(date, property) {
@@ -22,8 +24,13 @@ class Hotel {
     return Math.round(this.filterItemsBySpecificDate(date, 'bookings').length / this.rooms.length * 100);
   }
 
-  returnRoomsAvailableByDate(date) {
-    return this.rooms.length - this.filterItemsBySpecificDate(date, 'bookings').length
+  returnTotalNumberOfUnoccupiedRoomsByDate(date) {
+    return this.rooms.length - this.filterItemsBySpecificDate(date, 'bookings').length;
+  }
+
+  returnRoomsUnoccupiedByDate(date) {
+    let filteredBookings = this.filterItemsBySpecificDate(date, 'bookings');
+    return this.rooms.filter(room => !filteredBookings.some(booking => booking.roomNumber === room.number));
   }
 
   calculateTotalRevenueByDate(date) {
@@ -46,15 +53,17 @@ class Hotel {
       let targetBookings = this.findTargetCustomerInfo('bookings', targetUser);
       let targetRoomServices = this.findTargetCustomerInfo('roomServices', targetUser);
       this.currentCustomer = new Customer(targetUser.name, targetUser.id, targetBookings, targetRoomServices, this.findCurrentDate());
+      domUpdates.displayCurrentCustomer(targetUser.name);
     } else {
-      return false;
+      domUpdates.showErrorMessage(name);
     }
   }
 
   createCustomer(name) {
     let newId = this.users.length + 1;
     this.users.push({ id: newId, name: name });
-    this.currentCustomer = new Customer(name, newId, [], [])
+    this.currentCustomer = new Customer(name, newId, [], [], this.today)
+    domUpdates.displayCurrentCustomer(this.currentCustomer.name);
   }
 
   findCurrentDate() {

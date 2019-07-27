@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,400,800&display=swap" rel="stylesheet">
+    <title>OverLook Hotel</title>
   </head>
   <body>
     <header>
-      <h1>The Jungle Hotel</h1>
-      <div class="currentDate" id="currentDate"></div>
+      <h1>OverLook</h1>
+      <div class="current-date" id="current-date"></div>
     </header>
+    <nav class="tabs">
+      <button class="tab" id="tab-main">Main</button>
+      <button class="tab" id="tab-customer">Customer</button>
+      <button class="tab" id="tab-orders">Orders</button>
+      <button class="tab" id="tab-rooms">Rooms</button>
+    </nav>
     <main>
-      <nav class="tabs">
-        <button class="tablink">Main</button>
-        <button class="tablink">Customer</button>
-        <button class="tablink">Orders</button>
-        <button class="tablink">Rooms</button>
-      </nav>
-      <section class="tab main-tab">
-        <img src="/images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+      <section class="content" id="content-main">
+        <p class="current-customer">Current Customer: <span id="current-customer-name1"></span></p>
+        <div class="content-container">
+          <article class="article-main">
+            <p class="main__p">Total Revenue:</p>
+            <p class="main-totals" id="main-total-revenue">$</p>
+          </article>
+          <article class="article-main">
+            <p class="main__p">Precentage of rooms occupied:</p>
+            <p class="main-totals" id="main-occupied-rooms"></p>
+          </article>
+          <article class="article-main">
+            <p class="main__p">Total rooms available:</p>
+            <p class="main-totals" id="main-available-rooms"></p>
+          </article>
+        </div>
       </section>
-      <section class="tab customer-tab">
+      <section class="content" id="content-customer">
+        <p class="current-customer">Current Customer: <span id="current-customer-name2"></span></p>
+        <div class="content-container">
+          <article class="article-customer">
+            <p class="customer__p">Search our database for an exisiting customer!</p>
+            <input type="text" class="article__input" id="input-search-customer">
+            <button class="button-customer" id="button-search-customer">Search For Customer</button>
+            <p class="error-search-customer" id="error-search-customer"></p>
+          </article>
+          <article class="article-customer">
+            <p class="customer__p">Create a new customer!</p>
+            <input type="text" class="article__input" id="input-create-customer">
+            <button class="button-customer" id="button-create-customer">Search For Customer</button>
+          </article>
+        </div>
       </section>
-      <section class="tab orders=tab">
+      <section class="content" id="content-orders">
+        <p class="current-customer>Current Customer: <span id="current-customer-name3"></span></p>
       </section>
-      <section class="tab rooms-tab">
+      <section class="content" id="content-rooms">
+        <p class="current-customer">Current Customer: <span id="current-customer-name4"></span></p>
       </section>
     </main>
-
-
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>

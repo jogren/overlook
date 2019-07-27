@@ -1,40 +1,148 @@
-$primary-background: lightblue;
+$primary-background: cornsilk;
 
 * {
   margin: 0;
-  padding: 0;
 }
 
 body {
-  background-color: $primary-background;
+  background-image: url('https://image.freepik.com/free-vector/tropical-background-with-jungle-plants-exotic-pattern-with-palm-leaves_81520-59.jpg');
+  font-family: 'Catamaran', sans-serif;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
+  padding: 10px 30px;
+}
+
+h1 {
+  color: $primary-background;
+  font-size: 50px;
+}
+
+.current-date {
+  color: $primary-background;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 main {
-  background-color: grey;
-  height: 100vh;;
+  background-color: $primary-background;
+  height: 80vh;
+  width: 94%;
+  margin: auto;
+  opacity: 0.75;}
+
+// NAV
+
+nav {
+  height: 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.tablink {
+.tab {
   background-color: #555;
-  color: white;
+  color: $primary-background;
   float: left;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 25%;
+  width: 23.5%;
+  height: 50px;
+  opacity: 0.8;
+  font-weight: 700;
   &:hover {
-       background-color: grey;
-   }
+    background-color: $primary-background;
+    opacity: 0.7;
+    color: black;
+  }
+  &:focus {
+    background-color: $primary-background;
+    opacity: 0.7;
+    color: black;
+  }
 }
+
+// CONTENT SECTIONS
+
+.article-main {
+  border: #555 solid 3px;
+  height: 70%;
+  width: 30%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.content {
+  height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  height: 75%;
+}
+
+.main-totals {
+  font-size: 50px;
+  text-align: center;
+}
+
+.main__p {
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+}
+
+.customer__p {
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 0px 10px 0px;
+}
+
+.article-customer {
+  border: #555 solid 3px;
+  height: 70%;
+  width: 40%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-customer {
+  width: 200px;
+  height: 25px;
+  font-size: 14px;
+}
+
+.article__input {
+  height: 25px;
+  width: 200px;
+  border: #555 2px solid;
+  margin-bottom: 5px;
+}
+
+.error-search-customer {
+  color: red;
+}
+
+.current-customer {
+  text-align: center;
+  font-size: 28px;
+  padding: 15px 0px;
+}
+
+
 
 
 
