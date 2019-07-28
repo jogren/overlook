@@ -23,7 +23,7 @@ class Admin {
       let targetBookings = this.findTargetCustomerInfo('bookings', targetUser);
       let targetRoomServices = this.findTargetCustomerInfo('roomServices', targetUser);
       this.currentCustomer = new Customer(targetUser.name, targetUser.id, targetBookings, targetRoomServices, this.findCurrentDate());
-      domUpdates.displayCurrentCustomer(targetUser.name);
+      domUpdates.displayCurrentCustomer(this.currentCustomer);
     } else {
       domUpdates.showErrorMessage(name);
     }
@@ -33,7 +33,7 @@ class Admin {
     let newId = this.users.length + 1;
     this.users.push({ id: newId, name: name });
     this.currentCustomer = new Customer(name, newId, [], [], this.today)
-    domUpdates.displayCurrentCustomer(this.currentCustomer.name);
+    domUpdates.displayCurrentCustomer(this.currentCustomer);
   }
 
   findCurrentDate() {

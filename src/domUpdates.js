@@ -13,9 +13,12 @@ let domUpdates = {
 
   displayPageOnLoad(hotel) {
     $('.content').hide();
+    $('#customer-orders-total').hide();
+    $('.customer-orders-article').hide();
     $('.current-customer').css("visibility", "hidden");
     $('#content-main').show();
     this.showMainPageContent(hotel);
+    hotel.returnAllRoomServiceOrdersByDate('2019/07/28')
   },
 
   displaySectionOfPage(idName) {
@@ -29,12 +32,14 @@ let domUpdates = {
     $('#main-available-rooms').text(hotel.returnTotalNumberOfUnoccupiedRoomsByDate(this.displayCurrentDate()))
   },
 
-  displayCurrentCustomer(name) {
+  displayCurrentCustomer(currentCustomer) {
     $('.current-customer').css("visibility", "visible");
-    $('#current-customer-name1').text(name);
-    $('#current-customer-name2').text(name);
-    $('#current-customer-name3').text(name);
-    $('#current-customer-name4').text(name);
+    $('#current-customer-name1').text(currentCustomer.name);
+    $('#current-customer-name2').text(currentCustomer.name);
+    $('#current-customer-name3').text(currentCustomer.name);
+    $('#current-customer-name4').text(currentCustomer.name);
+    this.appendCustomerRoomServiceBreakdown(currentCustomer);
+    console.log(currentCustomer)
   },
 
   showErrorMessage(name) {
@@ -46,6 +51,60 @@ let domUpdates = {
     }, 3000);
   },
 
+  appendAllFoodItemsAndCostByDate(roomServiceObjects) {
+    $('.all-orders-error').html('');
+    $('#table-all-orders').html('');
+    if(roomServiceObjects.length === 0) {
+      $('#article-all-orders').append(`<p class="all-orders-error">There are are no room service orders for this date.</p>`)
+    } else {
+      $('#article-all-orders').append(
+        `<table id="table-all-orders">
+        </table>`);
+      roomServiceObjects.map(obj => {
+        return $('#table-all-orders').append(
+          `<tr>
+            <td>
+              ${obj.food}
+            </td>
+            <td>
+              $${obj.cost}
+            </td>
+          </tr>`)
+      });
+    }
+  },
+
+  appendCustomerRoomServiceBreakdown(currentCustomer) {
+    $('.customer-orders-article').show();
+    $('#customer-orders-total').show();
+    if(currentCustomer.roomServices.length) {
+      $('.customer-orders-total-number').text(`$${currentCustomer.allTimeRoomServiceDebt()}`)
+    } else {
+      $('.customer-orders-total-number').text(`$0`)
+    }
+    $('.customer-orders-error').html('');
+    $('#table-customer-orders').html('');
+    if(currentCustomer.roomServices.length) {
+      $('#article-customer-orders').append(`<table id="table-customer-orders">
+        </table>`);
+      currentCustomer.roomServices.map(obj => {
+        return $('#table-customer-orders').append(
+          `<tr>
+            <td>
+              ${obj.date}
+            </td>
+            <td>
+              ${obj.food}
+            </td>
+            <td>
+              $${obj.totalCost}
+            </td>
+          </tr>`)
+      });
+    } else {
+      $('#table-customer-orders').append(`<p class="customer-orders-error">This user has no room service orders on file.</p>`)
+    }
+  }
 }
 
 export default domUpdates;

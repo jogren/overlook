@@ -29,6 +29,7 @@ class Customer {
   allTimeRoomServiceDebt() {
     if(this.validateCustomer()) {
       let totalDebt = (this.roomServices.reduce((acc, obj) => { return acc += obj.totalCost }, 0)).toFixed(2);
+      console.log('totalDebt', totalDebt)
       return parseFloat(totalDebt); 
     }
   }

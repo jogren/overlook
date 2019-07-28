@@ -39,6 +39,7 @@ class Hotel {
         })
         return acc;
     }, 0) + roomServicesTotal;
+    console.log(this.availableRooms)
     return Number(totalRevenue.toFixed(2));
   }
 
@@ -62,9 +63,10 @@ class Hotel {
 
   returnAllRoomServiceOrdersByDate(date) {
     let targetRoomServiceObjects = this.filterItemsBySpecificDate(date, 'roomServices');
-    return targetRoomServiceObjects.map(obj => {
+    let result = targetRoomServiceObjects.map(obj => {
       return { food: obj.food, cost: obj.totalCost }
     })
+    domUpdates.appendAllFoodItemsAndCostByDate(result);
   }
 }
 

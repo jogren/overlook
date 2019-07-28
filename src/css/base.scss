@@ -142,6 +142,49 @@ nav {
   padding: 15px 0px;
 }
 
+.article-orders {
+  border: #555 solid 3px;
+  height: 70%;
+  width: 40%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orders__p {
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 0px 10px 0px;
+}
+
+td {
+  text-align: center;
+  padding: 0px 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.customer-orders-total {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 15%;
+}
+
+.customer-orders-total-number {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.article-rooms {
+  border: #555 solid 3px;
+  height: 70%;
+  width: 70%;
+  margin: auto;
+}
+
 
 
 

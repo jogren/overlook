@@ -39,27 +39,28 @@ Promise.all([users, roomServices, bookings, rooms])
 $('#tab-main').on('click', () => {
   domUpdates.displaySectionOfPage('#content-main');
 });
-
 $('#tab-customer').on('click', () => {
   domUpdates.displaySectionOfPage('#content-customer');
 });
-
 $('#tab-orders').on('click', () => {
   domUpdates.displaySectionOfPage('#content-orders');
 });
-
 $('#tab-rooms').on('click', () => {
   domUpdates.displaySectionOfPage('#content-rooms');
 });
 
 $('#button-search-customer').on('click', () => {
   admin.findCustomer($('#input-search-customer').val());
-  $('#input-search-customer').val('')
+  $('#input-search-customer').val('');
 })
-
 $('#button-create-customer').on('click', () => {
   admin.createCustomer($('#input-create-customer').val());
-  $('#input-create-customer').val('')
+  $('#input-create-customer').val('');
+})
+
+$('#button-all-orders').on('click', () => {
+  admin.currentHotel.returnAllRoomServiceOrdersByDate($('#input-all-orders').val());
+  $('#input-all-orders').val('');
 })
 
 // ONE PAGE LOAD

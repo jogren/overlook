@@ -1,5 +1,6 @@
 import Admin from '../src/Admin.js';
 import Hotel from '../src/Hotel.js';
+import domUpdates from '../src/domUpdates.js';
 import users from '../data/sampleUserData.js';
 import roomServices from '../data/sampleRoomServiceData.js';
 import bookings from '../data/sampleBookingData.js';
@@ -8,6 +9,8 @@ import chai from 'chai';
 const expect = chai.expect;
 
 let admin;
+
+chai.spy.on(domUpdates, ['appendAllFoodItemsAndCostByDate'], () => {});
 
 beforeEach(() => {
   admin = new Admin({users, roomServices, bookings, rooms, });
@@ -54,7 +57,9 @@ describe('Hotel', () => {
   });
   describe('returnAllRoomServiceOrdersByDate', () => {
     it('should return an array of objects of all room service orders on a specified date', () => {
-      expect(admin.currentHotel.returnAllRoomServiceOrdersByDate('2019/09/25').length).to.equal(2);
+      admin.currentHotel.returnAllRoomServiceOrdersByDate('2019/09/25');
+      expect(domUpdates.appendAllFoodItemsAndCostByDate).to.have.been.called(1);
+
     })
   });
 });

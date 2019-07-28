@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,400,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,400,500,600,700,800&display=swap" rel="stylesheet">
     <title>OverLook Hotel</title>
   </head>
   <body>
@@ -28,7 +28,7 @@
             <p class="main-totals" id="main-occupied-rooms"></p>
           </article>
           <article class="article-main">
-            <p class="main__p">Total rooms available:</p>
+            <p class="main__p">Total Rooms Available:</p>
             <p class="main-totals" id="main-available-rooms"></p>
           </article>
         </div>
@@ -50,10 +50,28 @@
         </div>
       </section>
       <section class="content" id="content-orders">
-        <p class="current-customer>Current Customer: <span id="current-customer-name3"></span></p>
+        <p class="current-customer">Current Customer: <span id="current-customer-name3"></span></p>
+        <div class="content-container">
+          <article class="article-orders">
+            <p class="orders__p">Total Orders Today:</p>
+            <div class="article-all-orders" id="article-all-orders">
+            </div>
+            <input type="text" class="article__input" id="input-all-orders">
+            <button class="button-customer" id="button-all-orders">Search By Date</button>
+          </article>
+          <article class="article-orders customer-orders-article">
+            <p class="orders__p">Customer Specific Info:</p>
+            <div class="article-customer-orders" id="article-customer-orders">
+            </div>
+            <p class="customer-orders-total" id="customer-orders-total">This customer's total room service debt is: <br><span class="customer-orders-total-number"></span></p>
+          </article>
+        </div>
       </section>
       <section class="content" id="content-rooms">
         <p class="current-customer">Current Customer: <span id="current-customer-name4"></span></p>
+        <article class="article-rooms" id="article-rooms">
+        </article>
+        <button></button>
       </section>
     </main>
   </body>
