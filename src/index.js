@@ -63,6 +63,10 @@ $('#button-all-orders').on('click', () => {
   $('#input-all-orders').val('');
 })
 
+$('#show-available-rooms').on('click', () => {
+  domUpdates.showRoomsAvailable(admin.currentHotel.availableRooms);
+})
+
 // ONE PAGE LOAD
 
 $('#current-date').text(domUpdates.displayCurrentDate())

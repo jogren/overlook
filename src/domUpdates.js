@@ -104,7 +104,38 @@ let domUpdates = {
     } else {
       $('#table-customer-orders').append(`<p class="customer-orders-error">This user has no room service orders on file.</p>`)
     }
+  },
+
+  showRoomsAvailable(availableRooms) {
+    console.log(availableRooms);
+    $('#table-available-rooms').append(
+      `<tr>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Number of Beds</th>
+        <th>Bed Size</th>
+        <th>Bidet</th>
+        <th>Price</th>
+      </tr>`)
+    availableRooms.map(room => {
+      return $('#table-available-rooms').append(
+        `<tr class="tr__available-rooms">
+          <td>${room.number}</td>
+          <td>${room.roomType}</td>
+          <td>${room.numBeds}</td>
+          <td>${room.bedSize}</td>
+          <td>${room.bidet}</td>
+          <td>$${room.costPerNight}</td>
+        </tr>`)
+    })
   }
 }
+
+bedSize: "twin"
+bidet: false
+costPerNight: 265.03
+numBeds: 1
+number: 1
+roomType: "residential suite"
 
 export default domUpdates;

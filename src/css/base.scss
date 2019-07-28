@@ -80,7 +80,7 @@ nav {
 }
 
 .content {
-  height: 100vh;
+  height: 90vh;
 }
 
 .content-container {
@@ -178,11 +178,37 @@ td {
   font-weight: 700;
 }
 
-.article-rooms {
+.article-rooms1 {
   border: #555 solid 3px;
-  height: 70%;
-  width: 70%;
-  margin: auto;
+  height: 80%;
+  width: 25%;
+  display: flex; 
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.article-rooms2 {
+  border: #555 solid 3px;
+  height: 80%;
+  width: 60%;
+  overflow: scroll;
+  display: flex; 
+  justify-content: center;
+  margin: 0px 10px;
+}
+
+.table-available-rooms {
+  width: 100%;
+}
+
+.tr__available-rooms:hover {
+  background-color: #009900;
+}
+
+.show-available-rooms {
+  height: 25px;
+  width: 175px;
+  font-size: 13px;
 }
 
 
