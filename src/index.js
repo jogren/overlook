@@ -90,9 +90,11 @@ $('#button-confirm-room-service').on('click', () => {
 })
 
 $('#button__all-rooms-available').on('click', () => {
-  let roomsAvailable = admin.currentHotel.returnRoomsUnoccupiedByDate($('#input__all-rooms-available').val());
-  domUpdates.displayAllRoomsAvailableByDate(roomsAvailable)
-  $('#input__all-rooms-available').val('')
+  if($('#input__all-rooms-available').val()) {
+    let roomsAvailable = admin.currentHotel.returnRoomsUnoccupiedByDate($('#input__all-rooms-available').val());
+    domUpdates.displayAllRoomsAvailableByDate(roomsAvailable)
+    $('#input__all-rooms-available').val('')
+  }
 })
 
 $('.form__all-rooms').on('click', (e) => {

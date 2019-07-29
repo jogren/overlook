@@ -65,6 +65,7 @@ class Hotel {
     let result = targetRoomServiceObjects.map(obj => {
       return { food: obj.food, cost: obj.totalCost }
     })
+    console.log(result)
     domUpdates.appendAllFoodItemsAndCostByDate(result);
   }
 }

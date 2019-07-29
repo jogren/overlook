@@ -28,7 +28,7 @@ let domUpdates = {
     $('.form__all-rooms').hide();
     this.showMainPageContent(hotel);
     this.showRoomsPageContent(hotel);
-    hotel.returnAllRoomServiceOrdersByDate('2019/07/28')
+    hotel.returnAllRoomServiceOrdersByDate(this.displayCurrentDate())
   },
 
   displaySectionOfPage(idName) {
@@ -79,8 +79,10 @@ let domUpdates = {
     $('.all-orders-error').html('');
     $('#table-all-orders').html('');
     if(roomServiceObjects.length === 0) {
+      $('#table-all-orders').hide();
       $('#article-all-orders').append(`<p class="all-orders-error">There are are no room service orders for this date.</p>`)
     } else {
+      $('#table-all-orders').show();
       $('#article-all-orders').append(
         `<table id="table-all-orders">
         </table>`);
