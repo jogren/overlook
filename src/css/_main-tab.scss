@@ -1,0 +1,35 @@
+$primary-background: cornsilk;
+$secondary-color: #555;
+
+.article-main {
+  border: $secondary-color solid 3px;
+  height: 60%;
+  width: 30%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 0px 30px 0px;
+}
+
+.content {
+  height: 90vh;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  height: 75%;
+}
+
+.main-totals {
+  font-size: 54px;
+  text-align: center;
+}
+
+.main__p {
+  font-size: 24px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+}

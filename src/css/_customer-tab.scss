@@ -1,0 +1,46 @@
+$primary-background: cornsilk;
+$secondary-color: #555;
+
+.customer__p {
+  font-size: 26px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 0px 10px 0px;
+}
+
+.article-customer {
+  border: $secondary-color solid 3px;
+  height: 60%;
+  width: 40%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0% 0% 8% 0%;
+}
+
+.button-customer {
+  width: 51%;
+  height: 30px;
+  font-size: 14px;
+  border: $secondary-color 2px solid;
+}
+
+.article__input {
+  height: 25px;
+  width: 50%;
+  border: $secondary-color 2px solid;
+  margin-bottom: 7px;
+}
+
+.error-search-customer {
+  color: red;
+}
+
+.current-customer {
+  text-align: center;
+  font-size: 24px;
+  padding: 15px 0px;
+}

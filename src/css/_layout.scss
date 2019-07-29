@@ -1,0 +1,68 @@
+$primary-background: cornsilk;
+$secondary-color: #555;
+
+* {
+  margin: 0;
+}
+
+body {
+  background-image: url('https://image.freepik.com/free-vector/tropical-background-with-jungle-plants-exotic-pattern-with-palm-leaves_81520-59.jpg');
+  font-family: 'Catamaran', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+h1 {
+  color: $primary-background;
+  font-size: 50px;
+}
+
+main {
+  background-color: $primary-background;
+  height: 80vh;
+  width: 94%;
+  margin: auto;
+  opacity: 0.85;
+}
+
+nav {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  background-color: $secondary-color;
+  color: $primary-background;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 23.5%;
+  height: 50px;
+  opacity: 0.85;
+  font-weight: 700;
+  &:hover {
+    background-color: $primary-background;
+    opacity: 0.85;
+    color: black;
+  }
+  &:focus {
+    background-color: $primary-background;
+    opacity: 0.85;
+    color: black;
+  }
+}
+
+.current-date {
+  color: $primary-background;
+  font-size: 28px;
+  font-weight: 700;
+}
