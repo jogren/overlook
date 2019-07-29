@@ -63,7 +63,7 @@
             <p class="orders__p">Customer Specific Info:</p>
             <div class="article-customer-orders" id="article-customer-orders">
             </div>
-            <p class="customer-orders-total" id="customer-orders-total">This customer's total room service debt is: <br><span class="customer-orders-total-number"></span></p>
+            <p class="customer-orders-total" id="customer-orders-total">Customer's Total Room Service Debt: <br><span class="customer-orders-total-number"></span></p>
           </article>
         </div>
       </section>
@@ -92,6 +92,13 @@
           <article class="article-rooms2" id="article-rooms">
             <table class="table-available-rooms" id="table-available-rooms"></table>
             <table class="table-room-service-menu" id="table-room-service-menu"></table>
+            <form class="form__all-rooms">
+              <input type="radio" name="room-type" id="input__radio-single-room" data-id="single room"> Single Room<br>
+              <input type="radio" name="room-type" id="input__radio-single-room" data-id="junior suite"> Junior Suite<br>
+              <input type="radio" name="room-type" id="input__radio-single-room" data-id="residential suite"> Residential Suite<br>
+              <input type="radio" name="room-type" id="input__radio-single-room" data-id="suite"> Suite<br>
+              <input type="radio" name="room-type" id="input__radio-single-room" data-id="all"> See All Room Types<br>
+            </form>
           </article>
         </div>
         <div class="booking-inquiry-container">
@@ -101,6 +108,7 @@
           <p class="p__confirmation-text" id="p__room-service-text">Please select room service items for an additional cost.</p>
           <button class="button-confirmation" id="button-confirm-room-service">Confirm Room Service Purchase</button>
           <p class="p__confirmation-text" id="p__room-service-total">Your current room service total is: $<span id="room-service-total-number">0.00</span></p>
+          <button class="button__filter-room-type" id="button__filter-room-type">Filter By Room Type</button>
           <div class="confirm-room-service-text" id="confirm-room-service-text"></div>
         </div>
       </section>

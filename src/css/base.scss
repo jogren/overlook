@@ -32,7 +32,8 @@ main {
   height: 79vh;
   width: 94%;
   margin: auto;
-  opacity: 0.75;}
+  opacity: 0.85;
+}
 
 // NAV
 
@@ -53,16 +54,16 @@ nav {
   font-size: 17px;
   width: 23.5%;
   height: 50px;
-  opacity: 0.8;
+  opacity: 0.85;
   font-weight: 700;
   &:hover {
     background-color: $primary-background;
-    opacity: 0.7;
+    opacity: 0.85;
     color: black;
   }
   &:focus {
     background-color: $primary-background;
-    opacity: 0.7;
+    opacity: 0.85;
     color: black;
   }
 }
@@ -125,8 +126,9 @@ nav {
 
 .button-customer {
   width: 51%;
-  height: 28px;
+  height: 30px;
   font-size: 14px;
+  border: #555 2px solid;
 }
 
 .article__input {
@@ -171,7 +173,7 @@ nav {
 
 td {
   text-align: center;
-  padding: 0px 10px;
+  padding: 0px 5px;
   font-size: 15px;
   font-weight: 500;
 }
@@ -180,6 +182,7 @@ td {
   font-size: 20px;
   text-align: center;
   margin-top: 8%;
+  font-weight: 600;
 }
 
 .customer-orders-total-number {
@@ -206,11 +209,22 @@ td {
 }
 
 
-.button__all-rooms-available {
-  height: 29px;
+.button__all-rooms-available,
+.button__filter-room-type,
+.button-confirmation,
+.button__main-menu,
+.show-available-rooms {
+  height: 30px;
   width: 26%;
   border: #555 2px solid;
   font-size: 14px;
+}
+
+.button__all-rooms-available,
+.button__filter-room-type,
+.button__main-menu,
+.show-available-rooms {
+  margin-bottom: 8px;
 }
 
 .article-all-rooms1 {
@@ -280,20 +294,10 @@ td {
   align-items: center;
 }
 
-.button-confirmation {
-  height: 25px;
-  width: 25%;
-  font-size: 13px;
-}
-
-.tr__available-rooms:hover {
+.tr__available-rooms:hover,
+.tr__room-service-item:hover,
+.tr__all-rooms-by-date:hover {
   background-color: #009900;
-}
-
-.show-available-rooms {
-  height: 25px;
-  width: 175px;
-  font-size: 13px;
 }
 
 .p__bookings-breakdown {
@@ -303,7 +307,7 @@ td {
 }
 
 .table-bookings-breakdown {
-  overflow: scroll;
+  width: 80%;
 }
 
 .th__bookings-breakdown {
@@ -313,6 +317,7 @@ td {
 .p__confirmation-text {
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .rooms-content-container {
@@ -329,6 +334,32 @@ input[type='checkbox'] {
 .p__room-service-confirmation {
   font-size: 24px;
   font-weight: 600;
+  margin-bottom: 10px;
+}
+
+form {
+  margin: auto;
+  font-size: 18px;
+  font-weight: 500;
+  border: #555 2px solid;
+  padding: 20px;
+}
+
+input[type='radio'] {
+  height: 17px;
+  width: 15px;
+}
+
+.confirm-room-service-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#room-service-total-number {
+  font-size: 24px;
+  font-weight: 500;
 }
 
 

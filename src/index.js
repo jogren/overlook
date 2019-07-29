@@ -1,16 +1,8 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
 import Hotel from './Hotel';
 import domUpdates from './domUpdates'
 import Admin from './Admin';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
 // FETCH
 
@@ -101,6 +93,22 @@ $('#button__all-rooms-available').on('click', () => {
   let roomsAvailable = admin.currentHotel.returnRoomsUnoccupiedByDate($('#input__all-rooms-available').val());
   domUpdates.displayAllRoomsAvailableByDate(roomsAvailable)
   $('#input__all-rooms-available').val('')
+})
+
+$('.form__all-rooms').on('click', (e) => {
+  let targetId = $(event.target).data('id');
+  if(targetId === 'all') {
+    domUpdates.handleAllRoomsFilter();
+    domUpdates.showRoomsAvailable(admin.currentHotel.availableRooms);
+  } else {
+    let filteredRoomsByType = admin.currentHotel.availableRooms.filter(room => room.roomType === targetId);
+    domUpdates.handleAllRoomsFilter();
+    domUpdates.showRoomsAvailable(filteredRoomsByType);
+  }
+})
+
+$('#button__filter-room-type').on('click', () => {
+  domUpdates.handleAllRoomsFilter();
 })
 
 function findTargetRoomService(cost) {
