@@ -26,6 +26,8 @@ let domUpdates = {
     $('.article-rooms1').hide();
     $('.article-rooms2').hide();
     $('.form__all-rooms').hide();
+    $('#button__filter-room-type').hide();
+    $('.rooms-content-container').hide();
     this.showMainPageContent(hotel);
     this.showRoomsPageContent(hotel);
     hotel.returnAllRoomServiceOrdersByDate(this.displayCurrentDate())
@@ -56,6 +58,7 @@ let domUpdates = {
     $('#show-available-rooms').show();
     $('.article-rooms1').show();
     $('.article-rooms2').show();
+    $('.rooms-content-container').show();
     $('.current-customer').css("visibility", "visible");
     $('#current-customer-name1').text(currentCustomer.name);
     $('#current-customer-name2').text(currentCustomer.name);
@@ -63,11 +66,10 @@ let domUpdates = {
     $('#current-customer-name4').text(currentCustomer.name);
     this.appendCustomerRoomServiceBreakdown(currentCustomer);
     this.displayCustomerBookingsBreakdown(currentCustomer);
-    console.log(currentCustomer)
   },
 
   showErrorMessage(name) {
-    $('#error-search-customer').append(`Whoops! We don't have a ${name} in our database. Please check your spelling or create a new customer!`);
+    $('#error-search-customer').append(`Whoops! We don't have that name in our database. Please check your spelling or create a new customer!`);
     $("#input-search-customer").css("border", "red 2px solid");
     setTimeout(() => {
      $('#error-search-customer').hide();
@@ -128,7 +130,8 @@ let domUpdates = {
           </tr>`)
       });
     } else {
-      $('#table-customer-orders').append(`<p class="customer-orders-error">This user has no room service orders on file.</p>`)
+      console.log('no room services');
+      $('#article-customer-orders').append(`<p class="customer-orders-error">This user has no room service orders on file.</p>`)
     }
   },
 
@@ -148,7 +151,7 @@ let domUpdates = {
       </tr>`)
     availableRooms.map(room => {
       return $('#table-available-rooms').append(
-        `<tr class="tr__available-rooms" data-id="${room.number}">
+        `<tr class="tr__available-rooms" data-id="${room.number}" tabindex="0">
           <td class="td__available-rooms" data-id="${room.number}">${room.number}</td>
           <td class="td__available-rooms" data-id="${room.number}">${room.roomType}</td>
           <td class="td__available-rooms" data-id="${room.number}">${room.numBeds}</td>
@@ -172,21 +175,26 @@ let domUpdates = {
     $('#p__booking-text').hide();
     $('#table-bookings-breakdown').html('');
     $('#p__booking-name').text(currentCustomer.name);
-    $('#table-bookings-breakdown').append(
-      `<tr>
-        <th class="th__bookings-breakdown">Date</th>
-        <th class="th__bookings-breakdown">Room Number</th>
-      </tr>`)
-    currentCustomer.bookings.map(booking => {
-      return $('#table-bookings-breakdown').append(
+    if(currentCustomer.bookings.length === 0) {
+      $('#bookings-breakdown-error').append(`<p class="p__booking-error">${currentCustomer.name} has zero bookings on file.</p>`)
+    } else {
+      $('#table-bookings-breakdown').append(
         `<tr>
-          <td>${booking.date}</td>
-          <td>${booking.roomNumber}</td>
+          <th class="th__bookings-breakdown">Date</th>
+          <th class="th__bookings-breakdown">Room Number</th>
         </tr>`)
-    })
+      currentCustomer.bookings.map(booking => {
+        return $('#table-bookings-breakdown').append(
+          `<tr>
+            <td>${booking.date}</td>
+            <td>${booking.roomNumber}</td>
+          </tr>`)
+      })
+    }
   },
 
   displayRoomServiceMenu(roomServices) {
+    $('#bookings-breakdown-error').hide();
     $('#table-available-rooms').hide();
     $('#p__room-service-text').show();
     $('#button-confirm-room-service').show();
