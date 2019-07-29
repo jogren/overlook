@@ -69,15 +69,40 @@
       </section>
       <section class="content" id="content-rooms">
         <p class="current-customer">Current Customer: <span id="current-customer-name4"></span></p>
-        <div class="content-container">
+        <div class="content-container all-rooms-container">
+          <article class="article-all-rooms1">
+            <p class="p__rooms">Most Popular Booking Date:</p>
+            <span class="most-least-popular-date" id="most-popular-date"></span>
+            <p class="p__rooms">Most Rooms Available:</p>
+            <span class="most-least-popular-date" id="least-popular-date"></span>
+          </article>
+          <article class="article-all-rooms2">
+            <table class="table__all-rooms-by-date" id="table__all-rooms-by-date"></table>
+          </article>
+        </div>
+        <div class="search-rooms-available-container">
+          <input type="text" class="input__all-rooms-available" id="input__all-rooms-available">
+          <button class="button__all-rooms-available" id="button__all-rooms-available">Search Available Rooms</button>
+        </div>
+        <div class="rooms-content-container">
           <article class="article-rooms1" id="bookings-breakdown">
-          <p>Breakdown for Customer Bookings:</p>
+            <p class="p__bookings-breakdown">Breakdown for <span id="p__booking-name"></span>'s Bookings:</p>
+            <table class="table-bookings-breakdown" id="table-bookings-breakdown"></table>
           </article>
           <article class="article-rooms2" id="article-rooms">
             <table class="table-available-rooms" id="table-available-rooms"></table>
+            <table class="table-room-service-menu" id="table-room-service-menu"></table>
           </article>
         </div>
-        <button class="show-available-rooms" id="show-available-rooms">Show All Available Rooms</button>
+        <div class="booking-inquiry-container">
+          <button class="show-available-rooms" id="show-available-rooms">Show All Available Rooms</button>
+          <p class="p__confirmation-text" id="p__booking-text">Would you like to confirm your booking of room <span id="booking-room-number"></span> for $<span id="booking-dollar-amount"></span>?</p>
+          <button class="button-confirmation" id="button-confirm-booking">Confirm Booking</button>
+          <p class="p__confirmation-text" id="p__room-service-text">Please select room service items for an additional cost.</p>
+          <button class="button-confirmation" id="button-confirm-room-service">Confirm Room Service Purchase</button>
+          <p class="p__confirmation-text" id="p__room-service-total">Your current room service total is: $<span id="room-service-total-number">0.00</span></p>
+          <div class="confirm-room-service-text" id="confirm-room-service-text"></div>
+        </div>
       </section>
     </main>
   </body>

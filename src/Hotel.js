@@ -39,7 +39,6 @@ class Hotel {
         })
         return acc;
     }, 0) + roomServicesTotal;
-    console.log(this.availableRooms)
     return Number(totalRevenue.toFixed(2));
   }
 

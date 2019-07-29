@@ -67,6 +67,62 @@ $('#show-available-rooms').on('click', () => {
   domUpdates.showRoomsAvailable(admin.currentHotel.availableRooms);
 })
 
-// ONE PAGE LOAD
+$('#content-rooms').on('click', (e) => {
+  if($(e.target).hasClass('td__available-rooms')) {
+    let targetId = $(e.target).attr('data-id');
+    let targetRoom = findTargetRoom(targetId);
+    admin.bookingInquiry = targetRoom;
+    domUpdates.displayBookingInquiry(targetRoom);
+  }
+})
+
+$('#content-rooms').on('click', (e) => {
+  if ($(e.target).hasClass('menu-checkbox') && $(e.target).prop('checked') == true) {
+    let targetCost = $(e.target).closest('tr').attr('data-id');
+    admin.roomServicesSelected.push(findTargetRoomService(targetCost));
+    domUpdates.updateRoomServiceTotal(totalRoomServicePurchase());
+  } else if ($(e.target).hasClass('menu-checkbox') && $(e.target).prop('checked') == false) {
+    let targetCost = $(e.target).closest('tr').attr('data-id');
+    domUpdates.updateRoomServiceTotal(subtractRoomServiceTotal(targetCost));
+  }
+})
+
+$('#button-confirm-booking').on('click', () => {
+  admin.createBooking();
+  domUpdates.displayCustomerBookingsBreakdown(admin.currentCustomer);
+  domUpdates.displayRoomServiceMenu(admin.roomServices);
+})
+
+$('#button-confirm-room-service').on('click', () => {
+  admin.createRoomServiceSelections();
+})
+
+$('#button__all-rooms-available').on('click', () => {
+  let roomsAvailable = admin.currentHotel.returnRoomsUnoccupiedByDate($('#input__all-rooms-available').val());
+  domUpdates.displayAllRoomsAvailableByDate(roomsAvailable)
+  $('#input__all-rooms-available').val('')
+})
+
+function findTargetRoomService(cost) {
+  return admin.roomServices.find(item => item.totalCost == cost);
+}
+
+function findTargetRoom(id) {
+ return admin.rooms.find(room => room.number == id);
+}
+
+function totalRoomServicePurchase() {
+  return admin.roomServicesSelected.reduce((acc, item) => {
+    acc += item.totalCost;
+    return acc;
+  }, 0);
+}
+
+function subtractRoomServiceTotal(cost) {
+  let targetIndex = admin.roomServicesSelected.findIndex(item => item.totalCost == cost);  
+  admin.roomServicesSelected.splice(targetIndex, 1);
+  return totalRoomServicePurchase();
+}
+// ON PAGE LOAD
 
 $('#current-date').text(domUpdates.displayCurrentDate())

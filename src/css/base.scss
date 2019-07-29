@@ -29,7 +29,7 @@ h1 {
 
 main {
   background-color: $primary-background;
-  height: 80vh;
+  height: 79vh;
   width: 94%;
   margin: auto;
   opacity: 0.75;}
@@ -122,6 +122,7 @@ nav {
   padding: 0% 0% 8% 0%;
 }
 
+
 .button-customer {
   width: 51%;
   height: 28px;
@@ -153,11 +154,11 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2%;
+  overflow: scroll;
 }
 
 #table-all-orders {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .orders__p {
@@ -171,7 +172,7 @@ nav {
 td {
   text-align: center;
   padding: 0px 10px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -186,18 +187,80 @@ td {
   font-weight: 700;
 }
 
+.all-rooms-container {
+  height: 50%;
+}
+
+.search-rooms-available-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.input__all-rooms-available {
+  height: 25px;
+  width: 25%;  
+  margin-bottom: 8px;
+  border: #555 2px solid;
+}
+
+
+.button__all-rooms-available {
+  height: 29px;
+  width: 26%;
+  border: #555 2px solid;
+  font-size: 14px;
+}
+
+.article-all-rooms1 {
+  border: #555 solid 3px;
+  height: 100%;
+  width: 30%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.article-all-rooms2 {
+  border: #555 solid 3px;
+  height: 100%;
+  width: 60%;
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.p__rooms {
+  font-size: 20px;
+  color: black;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 0px 10px 0px;
+}
+
+.most-least-popular-date {
+  font-size: 24px;
+}
+
 .article-rooms1 {
   border: #555 solid 3px;
-  height: 80%;
-  width: 25%;
+  height: 100%;
+  width: 30%;
   display: flex; 
   justify-content: center;
   margin: 0px 10px;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  justify-content: flex-start;
 }
 
 .article-rooms2 {
   border: #555 solid 3px;
-  height: 80%;
+  height: 100%;
   width: 60%;
   overflow: scroll;
   display: flex; 
@@ -207,6 +270,20 @@ td {
 
 .table-available-rooms {
   width: 100%;
+}
+
+.booking-inquiry-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.button-confirmation {
+  height: 25px;
+  width: 25%;
+  font-size: 13px;
 }
 
 .tr__available-rooms:hover {
@@ -219,6 +296,40 @@ td {
   font-size: 13px;
 }
 
+.p__bookings-breakdown {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.table-bookings-breakdown {
+  overflow: scroll;
+}
+
+.th__bookings-breakdown {
+  font-size: 16px;
+}
+
+.p__confirmation-text {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.rooms-content-container {
+  display: flex;
+  justify-content: center;
+  height: 60%;
+}
+
+input[type='checkbox'] {
+  height: 15px;
+  width: 15px;
+}
+
+.p__room-service-confirmation {
+  font-size: 24px;
+  font-weight: 600;
+}
 
 
 

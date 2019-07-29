@@ -1,5 +1,7 @@
 import Hotel from './Hotel';
 import Customer from './Customer';
+import Booking from './Bookings';
+import Services from './Services';
 import domUpdates from './domUpdates';
 
 class Admin {
@@ -11,6 +13,8 @@ class Admin {
     this.today = this.findCurrentDate();
     this.currentCustomer;
     this.currentHotel = new Hotel(this.users, this.roomServices, this.bookings, this.rooms, this.today);
+    this.bookingInquiry;
+    this.roomServicesSelected = [];
   }
 
   findTargetCustomerInfo(property, targetUser) {
@@ -43,6 +47,23 @@ class Admin {
     let yyyy = today.getFullYear();
     today = `${yyyy}/${mm}/${dd}`
     return today;
+  }
+
+  createBooking() {
+    let newBooking = new Booking(this.currentCustomer.id, this.today, this.bookingInquiry.number);
+    this.bookings.push(newBooking);
+    this.currentCustomer.bookings.push(newBooking);
+  }
+
+  createRoomServiceSelections() {
+    this.roomServicesSelected.forEach(service => {
+      let newRoomServiceSelection = new Services(service.userID, this.today, service.food, service.totalCost);
+      this.currentCustomer.roomServices.push(newRoomServiceSelection);
+      this.roomServices.push(newRoomServiceSelection);
+    })
+    domUpdates.appendCustomerRoomServiceBreakdown(this.currentCustomer);
+    domUpdates.resetRoomsPage(this.currentCustomer);
+
   }
 }
 

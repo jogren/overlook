@@ -17,7 +17,16 @@ let domUpdates = {
     $('.customer-orders-article').hide();
     $('.current-customer').css("visibility", "hidden");
     $('#content-main').show();
+    $('#p__booking-text').hide();
+    $('#button-confirm-booking').hide();
+    $('#p__room-service-text').hide();
+    $('#button-confirm-room-service').hide();
+    $('#p__room-service-total').hide();
+    $('#show-available-rooms').hide();
+    $('.article-rooms1').hide();
+    $('.article-rooms2').hide();
     this.showMainPageContent(hotel);
+    this.showRoomsPageContent(hotel);
     hotel.returnAllRoomServiceOrdersByDate('2019/07/28')
   },
 
@@ -32,13 +41,26 @@ let domUpdates = {
     $('#main-available-rooms').text(hotel.returnTotalNumberOfUnoccupiedRoomsByDate(this.displayCurrentDate()))
   },
 
+  showRoomsPageContent(hotel) {
+    $('#most-popular-date').text(hotel.findMostAndLeastPopularBookingDate('high'));
+    $('#least-popular-date').text(hotel.findMostAndLeastPopularBookingDate('low'))
+  },
+
   displayCurrentCustomer(currentCustomer) {
+    $('.article-all-rooms1').hide();
+    $('.article-all-rooms2').hide();
+    $('.all-rooms-container').hide();
+    $('.search-rooms-available-container').hide();
+    $('#show-available-rooms').show();
+    $('.article-rooms1').show();
+    $('.article-rooms2').show();
     $('.current-customer').css("visibility", "visible");
     $('#current-customer-name1').text(currentCustomer.name);
     $('#current-customer-name2').text(currentCustomer.name);
     $('#current-customer-name3').text(currentCustomer.name);
     $('#current-customer-name4').text(currentCustomer.name);
     this.appendCustomerRoomServiceBreakdown(currentCustomer);
+    this.displayCustomerBookingsBreakdown(currentCustomer);
     console.log(currentCustomer)
   },
 
@@ -107,7 +129,7 @@ let domUpdates = {
   },
 
   showRoomsAvailable(availableRooms) {
-    console.log(availableRooms);
+    $('#show-available-rooms').hide();
     $('#table-available-rooms').append(
       `<tr>
         <th>Room Number</th>
@@ -119,23 +141,139 @@ let domUpdates = {
       </tr>`)
     availableRooms.map(room => {
       return $('#table-available-rooms').append(
-        `<tr class="tr__available-rooms">
-          <td>${room.number}</td>
-          <td>${room.roomType}</td>
-          <td>${room.numBeds}</td>
-          <td>${room.bedSize}</td>
-          <td>${room.bidet}</td>
-          <td>$${room.costPerNight}</td>
+        `<tr class="tr__available-rooms data-id="${room.number}">
+          <td class="td__available-rooms" data-id="${room.number}">${room.number}</td>
+          <td class="td__available-rooms" data-id="${room.number}">${room.roomType}</td>
+          <td class="td__available-rooms" data-id="${room.number}">${room.numBeds}</td>
+          <td class="td__available-rooms" data-id="${room.number}">${room.bedSize}</td>
+          <td class="td__available-rooms" data-id="${room.number}">${room.bidet}</td>
+          <td class="td__available-rooms" data-id="${room.number}">$${room.costPerNight}</td>
         </tr>`)
     })
+  },
+
+  displayBookingInquiry(targetRoom) {
+    $('#booking-room-number').text(targetRoom.number);
+    $('#booking-dollar-amount').text(targetRoom.costPerNight);
+    $('#p__booking-text').show();
+    $('#button-confirm-booking').show();
+  },
+
+  displayCustomerBookingsBreakdown(currentCustomer) {
+    $('#button-confirm-booking').hide();
+    $('#p__booking-text').hide();
+    $('#table-bookings-breakdown').html('');
+    $('#p__booking-name').text(currentCustomer.name);
+    $('#table-bookings-breakdown').append(
+      `<tr>
+        <th class="th__bookings-breakdown">Date</th>
+        <th class="th__bookings-breakdown">Room Number</th>
+      </tr>`)
+    currentCustomer.bookings.map(booking => {
+      return $('#table-bookings-breakdown').append(
+        `<tr>
+          <td>${booking.date}</td>
+          <td>${booking.roomNumber}</td>
+        </tr>`)
+    })
+  },
+
+  displayRoomServiceMenu(roomServices) {
+    $('#table-available-rooms').hide();
+    $('#p__room-service-text').show();
+    $('#button-confirm-room-service').show();
+    $('#p__room-service-total').show();
+    $('#table-room-service-menu').append(
+      `<tr>
+        <th>Food</th>
+        <th>Price</th>
+        <th>Select Item</th>
+      </tr>`)
+    roomServices.map(item => {
+      return $('#table-room-service-menu').append(
+        `<tr class="tr__room-service-item" data-id="${item.totalCost}">
+          <td class="td__room-service-item" data-id="${item.totalCost}">${item.food}</td>
+          <td class="td__room-service-item" data-id="${item.totalCost}">${item.totalCost}</td>
+          <td class="td__room-service-item" data-id="${item.totalCost}"><input type="checkbox" class="menu-checkbox" id="menu-checkbox"></td>
+        </tr>`)
+    })
+  },
+
+  updateRoomServiceTotal(totalCost) {
+    $('#room-service-total-number').text(totalCost.toFixed(2));
+  },
+
+  resetRoomsPage(customer) {
+    $('#p__room-service-text').hide();
+    $('#button-confirm-room-service').hide();
+    $('#p__room-service-total').hide();
+    $('.rooms-content-container').hide();
+    $('#confirm-room-service-text').append(
+      `<p class="p__room-service-confirmation">Room service for ${customer.name} has been submitted. Thank you!</p>`)
+  }, 
+
+  displayAllRoomsAvailableByDate(roomsAvailable) {
+    // $('#table__all-rooms-by-date').append(
+    //   `<tr>
+    //     <th>Room Number</th>
+    //     <th>Room Type</th>
+    //     <th>Number of Beds</th>
+    //     <th>Bed Size</th>
+    //     <th>Bidet</th>
+    //     <th>Price</th>
+    //   </tr>`)
+    // roomsAvailable.map(room => {
+    //   return $('#table__all-rooms-by-date').append(
+    //     `<tr class="tr__all-rooms-by-date data-id="${room.number}">
+    //       <td class="td__all-rooms-by-date" data-id="${room.number}">${room.number}</td>
+    //       <td class="td__all-rooms-by-date" data-id="${room.number}">${room.roomType}</td>
+    //       <td class="td__all-rooms-by-date" data-id="${room.number}">${room.numBeds}</td>
+    //       <td class="td__all-rooms-by-date" data-id="${room.number}">${room.bedSize}</td>
+    //       <td class="td__all-rooms-by-date" data-id="${room.number}">${room.bidet}</td>
+    //       <td class="td__all-rooms-by-date" data-id="${room.number}">$${room.costPerNight}</td>
+    //     </tr>`)
+    // })
+    $('#table__all-rooms-by-date').html('');
+    $('.article-all-rooms2').prepend(
+      `<table id="table__all-rooms-by-date">
+        <tr>
+          <th>Room Number</th>
+          <th>Room Type</th>
+          <th>Number of Beds</th>
+          <th>Bed Size</th>
+          <th>Bidet</th>
+          <th>Price</th>
+        </tr>
+      </table>`);
+    roomsAvailable.map(room => {
+      return $('#table__all-rooms-by-date').append(
+        `<tr class="tr__all-rooms-by-date data-id="${room.number}">
+          <td class="td__all-rooms-by-date" data-id="${room.number}">${room.number}</td>
+          <td class="td__all-rooms-by-date" data-id="${room.number}">${room.roomType}</td>
+          <td class="td__all-rooms-by-date" data-id="${room.number}">${room.numBeds}</td>
+          <td class="td__all-rooms-by-date" data-id="${room.number}">${room.bedSize}</td>
+          <td class="td__all-rooms-by-date" data-id="${room.number}">${room.bidet}</td>
+          <td class="td__all-rooms-by-date" data-id="${room.number}">$${room.costPerNight}</td>
+        </tr>`)
+    })
+    
   }
 }
 
-bedSize: "twin"
-bidet: false
-costPerNight: 265.03
-numBeds: 1
-number: 1
-roomType: "residential suite"
+// article-all-rooms2
+// $('#article-all-orders').append(
+//   `<table id="table-all-orders">
+//   </table>`);
+// roomServiceObjects.map(obj => {
+//   return $('#table-all-orders').append(
+//     `<tr>
+//       <td>
+//         ${obj.food}
+//       </td>
+//       <td>
+//         $${obj.cost}
+//       </td>
+//     </tr>`)
+// });
 
 export default domUpdates;
