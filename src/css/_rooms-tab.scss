@@ -64,6 +64,8 @@ $secondary-color: #555;
   font-weight: 700;
   text-align: center;
   margin: 20px 0px 10px 0px;
+  border-bottom: $secondary-color 2px solid;
+  padding: 5px;
 }
 
 .most-least-popular-date {
@@ -116,7 +118,7 @@ $secondary-color: #555;
   font-size: 18px;
   font-weight: 600;
   border-bottom: $secondary-color 2px solid;
-  padding: 5px;
+  padding: 7px;
 }
 
 .table-bookings-breakdown {

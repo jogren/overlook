@@ -20,6 +20,7 @@ header {
 h1 {
   color: $primary-background;
   font-size: 50px;
+  text-shadow: 1px 1px $secondary-color;
 }
 
 main {
@@ -65,4 +66,5 @@ nav {
   color: $primary-background;
   font-size: 28px;
   font-weight: 700;
+  text-shadow: 1px 1px $secondary-color;
 }
