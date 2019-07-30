@@ -64,6 +64,7 @@ $('#content-rooms').on('click', (e) => {
     let targetId = $(e.target).attr('data-id');
     let targetRoom = findTargetRoom(targetId);
     admin.bookingInquiry = targetRoom;
+    console.log(targetRoom)
     domUpdates.displayBookingInquiry(targetRoom);
   }
 })
@@ -133,6 +134,7 @@ function subtractRoomServiceTotal(cost) {
   admin.roomServicesSelected.splice(targetIndex, 1);
   return totalRoomServicePurchase();
 }
+
 // ON PAGE LOAD
 
-$('#current-date').text(domUpdates.displayCurrentDate())
+// $('#current-date').text(domUpdates.displayCurrentDate())

@@ -12,25 +12,20 @@ let domUpdates = {
   },
 
   displayPageOnLoad(hotel) {
-    $('.content').hide();
-    $('#customer-orders-total').hide();
-    $('.customer-orders-article').hide();
+    $('#current-date').text(this.displayCurrentDate());
+    this.hideItems();
     $('.current-customer').css("visibility", "hidden");
     $('#content-main').show();
-    $('#p__booking-text').hide();
-    $('#button-confirm-booking').hide();
-    $('#p__room-service-text').hide();
-    $('#button-confirm-room-service').hide();
-    $('#p__room-service-total').hide();
-    $('#show-available-rooms').hide();
-    $('.article-rooms1').hide();
-    $('.article-rooms2').hide();
-    $('.form__all-rooms').hide();
-    $('#button__filter-room-type').hide();
-    $('.rooms-content-container').hide();
     this.showMainPageContent(hotel);
     this.showRoomsPageContent(hotel);
     hotel.returnAllRoomServiceOrdersByDate(this.displayCurrentDate())
+  },
+
+  hideItems() {
+    let elements = ['.content', '#customer-orders-total', '.customer-orders-article', '#p__booking-text', '#button-confirm-booking', '#p__room-service-text', '#button-confirm-room-service', '#p__room-service-total', '#show-available-rooms', '.article-rooms1', '.article-rooms2', '.form__all-rooms', '#button__filter-room-type', '.rooms-content-container'];
+    elements.forEach(element => {
+      $(element).hide();
+    })
   },
 
   displaySectionOfPage(idName) {
@@ -50,15 +45,8 @@ let domUpdates = {
   },
 
   displayCurrentCustomer(currentCustomer) {
-    $('.article-all-rooms1').hide();
-    $('.article-all-rooms2').hide();
-    $('.all-rooms-container').hide();
-    $('.search-rooms-available-container').hide();
-    $('#button__filter-room-type').hide();
-    $('#show-available-rooms').show();
-    $('.article-rooms1').show();
-    $('.article-rooms2').show();
-    $('.rooms-content-container').show();
+    $('.article-all-rooms1, .article-all-rooms2, .all-rooms-container, .search-rooms-available-container, #button__filter-room-type').hide();
+    $('#show-available-rooms, .article-rooms1, .article-rooms1, .article-rooms2, .rooms-content-container').show();
     $('.current-customer').css("visibility", "visible");
     $('#current-customer-name1').text(currentCustomer.name);
     $('#current-customer-name2').text(currentCustomer.name);
@@ -78,8 +66,7 @@ let domUpdates = {
   },
 
   appendAllFoodItemsAndCostByDate(roomServiceObjects) {
-    $('.all-orders-error').html('');
-    $('#table-all-orders').html('');
+    $('.all-orders-error, #table-all-orders').html('');
     if(roomServiceObjects.length === 0) {
       $('#table-all-orders').hide();
       $('#article-all-orders').append(`<p class="all-orders-error">There are are no room service orders for this date.</p>`)
@@ -103,15 +90,13 @@ let domUpdates = {
   },
 
   appendCustomerRoomServiceBreakdown(currentCustomer) {
-    $('.customer-orders-article').show();
-    $('#customer-orders-total').show();
+    $('.customer-orders-article, #customer-orders-total').show();
     if(currentCustomer.roomServices.length) {
       $('.customer-orders-total-number').text(`$${currentCustomer.allTimeRoomServiceDebt()}`)
     } else {
       $('.customer-orders-total-number').text(`$0`)
     }
-    $('.customer-orders-error').html('');
-    $('#table-customer-orders').html('');
+    $('.customer-orders-error, #table-customer-orders').html('');
     if(currentCustomer.roomServices.length) {
       $('#article-customer-orders').append(`<table id="table-customer-orders">
         </table>`);
@@ -130,15 +115,13 @@ let domUpdates = {
           </tr>`)
       });
     } else {
-      console.log('no room services');
       $('#article-customer-orders').append(`<p class="customer-orders-error">This user has no room service orders on file.</p>`)
     }
   },
 
   showRoomsAvailable(availableRooms) {
     $('.tr__available-rooms-header').html('');
-    $('.tr__available-rooms').hide();
-    $('#show-available-rooms').hide();
+    $('.tr__available-rooms, #show-available-rooms').hide();
     $('#button__filter-room-type').show();
     $('#table-available-rooms').append(
       `<tr class="tr__available-rooms-header">
@@ -166,13 +149,11 @@ let domUpdates = {
     $('#button__filter-room-type').hide();
     $('#booking-room-number').text(targetRoom.number);
     $('#booking-dollar-amount').text(targetRoom.costPerNight);
-    $('#p__booking-text').show();
-    $('#button-confirm-booking').show();
+    $('#p__booking-text, #button-confirm-booking').show();
   },
 
   displayCustomerBookingsBreakdown(currentCustomer) {
-    $('#button-confirm-booking').hide();
-    $('#p__booking-text').hide();
+    $('#button-confirm-booking, #p__booking-text').hide();
     $('#table-bookings-breakdown').html('');
     $('#p__booking-name').text(currentCustomer.name);
     if(currentCustomer.bookings.length === 0) {
@@ -194,11 +175,8 @@ let domUpdates = {
   },
 
   displayRoomServiceMenu(roomServices) {
-    $('#bookings-breakdown-error').hide();
-    $('#table-available-rooms').hide();
-    $('#p__room-service-text').show();
-    $('#button-confirm-room-service').show();
-    $('#p__room-service-total').show();
+    $('#bookings-breakdown-error, #table-available-rooms').hide();
+    $('#p__room-service-text, #button-confirm-room-service, #p__room-service-total').show();
     $('#table-room-service-menu').append(
       `<tr>
         <th>Food</th>
@@ -220,10 +198,7 @@ let domUpdates = {
   },
 
   resetRoomsPage(customer) {
-    $('#p__room-service-text').hide();
-    $('#button-confirm-room-service').hide();
-    $('#p__room-service-total').hide();
-    $('.rooms-content-container').hide();
+    $('#p__room-service-text, #button-confirm-room-service, #p__room-service-total, .rooms-content-container').hide();
     $('#confirm-room-service-text').append(
       `<p class="p__room-service-confirmation">Room service for ${customer.name} has been submitted. Thank you!</p>
       <button class="button__main-menu" id="button__main-menu" onClick="window.location.reload()">Return to the main menu</button>`)

@@ -52,7 +52,7 @@ describe('Hotel', () => {
     })
 
     it('should find the date with the most rooms available', () => {
-      expect(admin.currentHotel.findMostAndLeastPopularBookingDate('low')).to.equal('2019/09/27');
+      expect(admin.currentHotel.findMostAndLeastPopularBookingDate('low')).to.equal('2019/07/29');
     })
   });
   describe('returnAllRoomServiceOrdersByDate', () => {
