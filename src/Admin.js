@@ -22,8 +22,8 @@ class Admin {
   }
 
   findCustomer(name) {
-    let targetUser = this.users.find(user => user.name.toLowerCase() == name.toLowerCase());
-    if(targetUser) {
+    let targetUser = this.users.find(user => user.name.toLowerCase() === name.toLowerCase());
+    if (targetUser) {
       let targetBookings = this.findTargetCustomerInfo('bookings', targetUser);
       let targetRoomServices = this.findTargetCustomerInfo('roomServices', targetUser);
       this.currentCustomer = new Customer(targetUser.name, targetUser.id, targetBookings, targetRoomServices, this.findCurrentDate());
@@ -35,7 +35,7 @@ class Admin {
 
   createCustomer(name) {
     let newId = this.users.length + 1;
-    this.users.push({ id: newId, name: name });
+    this.users.push( { id: newId, name: name } );
     this.currentCustomer = new Customer(name, newId, [], [], this.today)
     domUpdates.displayCurrentCustomer(this.currentCustomer);
   }

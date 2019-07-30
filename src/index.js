@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import Hotel from './Hotel';
 import domUpdates from './domUpdates'
 import Admin from './Admin';
 import './css/base.scss';
@@ -21,7 +20,6 @@ Promise.all([users, roomServices, bookings, rooms])
     allData['bookings'] = values[2].bookings;
     allData['rooms'] = values[3].rooms;
     admin = new Admin(allData)
-    console.log(admin)
     domUpdates.displayPageOnLoad(admin.currentHotel);
   })
   .catch(error => console.log(`Error in promises ${error}`));
@@ -31,12 +29,15 @@ Promise.all([users, roomServices, bookings, rooms])
 $('#tab-main').on('click', () => {
   domUpdates.displaySectionOfPage('#content-main');
 });
+
 $('#tab-customer').on('click', () => {
   domUpdates.displaySectionOfPage('#content-customer');
 });
+
 $('#tab-orders').on('click', () => {
   domUpdates.displaySectionOfPage('#content-orders');
 });
+
 $('#tab-rooms').on('click', () => {
   domUpdates.displaySectionOfPage('#content-rooms');
 });
@@ -45,6 +46,7 @@ $('#button-search-customer').on('click', () => {
   admin.findCustomer($('#input-search-customer').val());
   $('#input-search-customer').val('');
 })
+
 $('#button-create-customer').on('click', () => {
   admin.createCustomer($('#input-create-customer').val());
   $('#input-create-customer').val('');
@@ -60,21 +62,20 @@ $('#show-available-rooms').on('click', () => {
 })
 
 $('#content-rooms').on('click', (e) => {
-  if($(e.target).hasClass('td__available-rooms')) {
+  if ($(e.target).hasClass('td__available-rooms')) {
     let targetId = $(e.target).attr('data-id');
     let targetRoom = findTargetRoom(targetId);
     admin.bookingInquiry = targetRoom;
-    console.log(targetRoom)
     domUpdates.displayBookingInquiry(targetRoom);
   }
 })
 
 $('#content-rooms').on('click', (e) => {
-  if ($(e.target).hasClass('menu-checkbox') && $(e.target).prop('checked') == true) {
+  if ($(e.target).hasClass('menu-checkbox') && $(e.target).prop('checked') === true) {
     let targetCost = $(e.target).closest('tr').attr('data-id');
     admin.roomServicesSelected.push(findTargetRoomService(targetCost));
     domUpdates.updateRoomServiceTotal(totalRoomServicePurchase());
-  } else if ($(e.target).hasClass('menu-checkbox') && $(e.target).prop('checked') == false) {
+  } else if ($(e.target).hasClass('menu-checkbox') && $(e.target).prop('checked') === false) {
     let targetCost = $(e.target).closest('tr').attr('data-id');
     domUpdates.updateRoomServiceTotal(subtractRoomServiceTotal(targetCost));
   }
@@ -91,16 +92,16 @@ $('#button-confirm-room-service').on('click', () => {
 })
 
 $('#button__all-rooms-available').on('click', () => {
-  if($('#input__all-rooms-available').val()) {
+  if ($('#input__all-rooms-available').val()) {
     let roomsAvailable = admin.currentHotel.returnRoomsUnoccupiedByDate($('#input__all-rooms-available').val());
     domUpdates.displayAllRoomsAvailableByDate(roomsAvailable)
     $('#input__all-rooms-available').val('')
   }
 })
 
-$('.form__all-rooms').on('click', (e) => {
+$('.form__all-rooms').on('click', () => {
   let targetId = $(event.target).data('id');
-  if(targetId === 'all') {
+  if (targetId === 'all') {
     domUpdates.handleAllRoomsFilter();
     domUpdates.showRoomsAvailable(admin.currentHotel.availableRooms);
   } else {
@@ -119,7 +120,7 @@ function findTargetRoomService(cost) {
 }
 
 function findTargetRoom(id) {
- return admin.rooms.find(room => room.number == id);
+  return admin.rooms.find(room => room.number == id);
 }
 
 function totalRoomServicePurchase() {
@@ -130,11 +131,7 @@ function totalRoomServicePurchase() {
 }
 
 function subtractRoomServiceTotal(cost) {
-  let targetIndex = admin.roomServicesSelected.findIndex(item => item.totalCost == cost);  
+  let targetIndex = admin.roomServicesSelected.findIndex(item => item.totalCost === cost);  
   admin.roomServicesSelected.splice(targetIndex, 1);
   return totalRoomServicePurchase();
 }
-
-// ON PAGE LOAD
-
-// $('#current-date').text(domUpdates.displayCurrentDate())

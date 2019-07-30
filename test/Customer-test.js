@@ -7,12 +7,9 @@ import rooms from '../data/sampleRoomData.js';
 import domUpdates from '../src/domUpdates.js'
 import chai from 'chai';
 const expect = chai.expect;
-import spies from 'chai-spies';
-chai.use(spies);
 
 let admin;
 
-  chai.spy.on(domUpdates, ['displayCurrentCustomer', 'showErrorMessage'], () => {});
 beforeEach(() => {
   admin = new Admin({users, roomServices, bookings, rooms});
   admin.findCustomer('Matilde Larson')
@@ -64,23 +61,4 @@ describe('Customer', () => {
       expect(admin.currentCustomer.validateCustomer()).to.equal(false)
     })
   });
-
-  describe('sortCustomerBookingHistory', () => {
-    it.skip('should sort a customer\'s booking history', () => {
-      expect(admin.currentCustomer.sortCustomerBookingHistory()).to.eql([
-    { userID: 1, date: '2019/09/01', roomNumber: 41 },
-    { userID: 1, date: '2019/10/19', roomNumber: 5 },
-    { userID: 1, date: '2019/10/30', roomNumber: 35 }
-      ])
-    })
-  });
 });
-
-
-
-
-
-
-
-
-

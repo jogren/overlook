@@ -1,13 +1,18 @@
 import Admin from '../src/Admin.js';
-import Booking from '../src/Bookings.js';
+import Customer from '../src/Customer.js';
+import domUpdates from '../src/domUpdates.js';
 import users from '../data/sampleUserData.js';
 import roomServices from '../data/sampleRoomServiceData.js';
 import bookings from '../data/sampleBookingData.js';
 import rooms from '../data/sampleRoomData.js';
 import chai from 'chai';
 const expect = chai.expect;
+import spies from 'chai-spies';
+chai.use(spies);
 
 let admin;
+
+chai.spy.on(domUpdates, ['displayCurrentCustomer', 'showErrorMessage', 'appendCustomerRoomServiceBreakdown', 'resetRoomsPage'], () => {});
 
 beforeEach(() => {
   admin = new Admin({users, roomServices, bookings, rooms});
@@ -24,8 +29,14 @@ describe('Admin', () => {
       expect(admin.currentCustomer.name).to.equal('Matilde Larson');
     })
 
-    it.skip('should return false if there\'s no user by the name', () => {
-      expect(admin.findCustomer('blah blah')).to.equal(false);
+    it('should display if given a valid customer', () => {
+      admin.findCustomer('Matilde Larson');
+      expect(domUpdates.displayCurrentCustomer).to.have.been.called(5);
+    })
+
+    it('should display error message when given a invalid name', () => {
+      admin.findCustomer('blah blah');
+      expect(domUpdates.showErrorMessage).to.have.been.called(1);
     })
   });
 
@@ -42,20 +53,23 @@ describe('Admin', () => {
   });
 
   describe('createBooking', () => {
-    it('should update the current customer\'s booking array when a new booking is created', () => {
+    it('should update the current customer\'s and total booking array when a new booking is created', () => {
       admin.bookingInquiry = { number: 3, roomType: "suite", bidet: false, bedSize: "twin", numBeds: 1, costPerNight: 275.99 }
-      admin.findCustomer('Matilde Larson')
-      let newBooking = new Booking(1, '2019/09/27', 3);
+      admin.currentCustomer = new Customer('Matilde Larson', 1, [], [], "2019/09/25");
+      expect(admin.bookings.length).to.equal(10);
+      expect(admin.currentCustomer.bookings.length).to.equal(0);
       admin.createBooking();
       expect(admin.bookings.length).to.equal(11);
+      expect(admin.currentCustomer.bookings.length).to.equal(1);
     })
   });
 
   describe('createRoomServiceSelections', () => {
-    it.skip('should update the current customer\'s booking array when a new booking is created', () => {
-      let booking = new Booking(1, '2019/07/29', 12);
-      admin.createBooking();
-      expect(admin.bookings).to.equal(6);
+    it('should call append customer room service info and reset the rooms page', () => {
+      admin.createRoomServiceSelections();
+      expect(domUpdates.appendCustomerRoomServiceBreakdown).to.have.been.called(1);
+      expect(domUpdates.resetRoomsPage).to.have.been.called(1);
+
     })
   });
 });

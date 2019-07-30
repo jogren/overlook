@@ -32,19 +32,19 @@ class Hotel {
       return acc += item.totalCost;
     }, 0);
     let totalRevenue = this.filterItemsBySpecificDate(date, 'bookings').reduce((acc, booking) => {
-        this.rooms.forEach(room => {
-          if (booking.roomNumber === room.number) {
-            acc += room.costPerNight;
-          }
-        })
-        return acc;
+      this.rooms.forEach(room => {
+        if (booking.roomNumber === room.number) {
+          acc += room.costPerNight;
+        }
+      })
+      return acc;
     }, 0) + roomServicesTotal;
     return Number(totalRevenue.toFixed(2));
   }
 
   findMostAndLeastPopularBookingDate(popularity) {
     let bookingObj = this.bookings.reduce((acc, booking) => {
-      if(!acc[booking.date]) {
+      if (!acc[booking.date]) {
         acc[booking.date] = 1
       } else {
         acc[booking.date]++;
@@ -52,9 +52,9 @@ class Hotel {
       return acc;
     }, {});
     return Object.keys(bookingObj).reduce((acc, key) => {
-      if(popularity === 'high') {
+      if (popularity === 'high') {
         return bookingObj[acc] > bookingObj[key] ? acc : key
-      } else if(popularity === 'low') {
+      } else if (popularity === 'low') {
         return bookingObj[acc] < bookingObj[key] ? acc : key
       }
     })

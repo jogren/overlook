@@ -7,6 +7,8 @@ import bookings from '../data/sampleBookingData.js';
 import rooms from '../data/sampleRoomData.js';
 import chai from 'chai';
 const expect = chai.expect;
+import spies from 'chai-spies';
+chai.use(spies);
 
 let admin;
 
@@ -52,7 +54,7 @@ describe('Hotel', () => {
     })
 
     it('should find the date with the most rooms available', () => {
-      expect(admin.currentHotel.findMostAndLeastPopularBookingDate('low')).to.equal('2019/07/29');
+      expect(admin.currentHotel.findMostAndLeastPopularBookingDate('low')).to.equal(admin.today);
     })
   });
   describe('returnAllRoomServiceOrdersByDate', () => {

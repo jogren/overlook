@@ -56,18 +56,18 @@ let domUpdates = {
     this.displayCustomerBookingsBreakdown(currentCustomer);
   },
 
-  showErrorMessage(name) {
+  showErrorMessage() {
     $('#error-search-customer').append(`Whoops! We don't have that name in our database. Please check your spelling or create a new customer!`);
     $("#input-search-customer").css("border", "red 2px solid");
     setTimeout(() => {
-     $('#error-search-customer').hide();
-     $("#input-search-customer").css("border", "");
+      $('#error-search-customer').hide();
+      $("#input-search-customer").css("border", "");
     }, 3000);
   },
 
   appendAllFoodItemsAndCostByDate(roomServiceObjects) {
     $('.all-orders-error, #table-all-orders').html('');
-    if(roomServiceObjects.length === 0) {
+    if (roomServiceObjects.length === 0) {
       $('#table-all-orders').hide();
       $('#article-all-orders').append(`<p class="all-orders-error">There are are no room service orders for this date.</p>`)
     } else {
@@ -91,13 +91,13 @@ let domUpdates = {
 
   appendCustomerRoomServiceBreakdown(currentCustomer) {
     $('.customer-orders-article, #customer-orders-total').show();
-    if(currentCustomer.roomServices.length) {
+    if (currentCustomer.roomServices.length) {
       $('.customer-orders-total-number').text(`$${currentCustomer.allTimeRoomServiceDebt()}`)
     } else {
       $('.customer-orders-total-number').text(`$0`)
     }
     $('.customer-orders-error, #table-customer-orders').html('');
-    if(currentCustomer.roomServices.length) {
+    if (currentCustomer.roomServices.length) {
       $('#article-customer-orders').append(`<table id="table-customer-orders">
         </table>`);
       currentCustomer.roomServices.map(obj => {
@@ -156,7 +156,7 @@ let domUpdates = {
     $('#button-confirm-booking, #p__booking-text').hide();
     $('#table-bookings-breakdown').html('');
     $('#p__booking-name').text(currentCustomer.name);
-    if(currentCustomer.bookings.length === 0) {
+    if (currentCustomer.bookings.length === 0) {
       $('#bookings-breakdown-error').append(`<p class="p__booking-error">${currentCustomer.name} has zero bookings on file.</p>`)
     } else {
       $('#table-bookings-breakdown').append(
