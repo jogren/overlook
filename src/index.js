@@ -89,6 +89,7 @@ $('#button-confirm-booking').on('click', () => {
 
 $('#button-confirm-room-service').on('click', () => {
   admin.createRoomServiceSelections();
+  domUpdates.showMainPageContent(admin.currentHotel);
 })
 
 $('#button__all-rooms-available').on('click', () => {
@@ -114,6 +115,16 @@ $('.form__all-rooms').on('click', () => {
 $('#button__filter-room-type').on('click', () => {
   domUpdates.handleAllRoomsFilter();
 })
+
+// $('#content-rooms').on('click', (e) => {
+//   if ($(e.target).hasClass('button__main-menu')) {
+//     console.log('test')
+//     $('#confirm-room-service-text').hide();
+//     $('#table-room-service-menu').hide();
+//     $('#article-rooms').hide();
+//     domUpdates.displayCurrentCustomer(admin.currentCustomer);
+//   }
+// })
 
 function findTargetRoomService(cost) {
   return admin.roomServices.find(item => item.totalCost == cost);

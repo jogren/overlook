@@ -68,7 +68,7 @@ let domUpdates = {
   appendAllFoodItemsAndCostByDate(roomServiceObjects) {
     $('.all-orders-error, #table-all-orders').html('');
     if (roomServiceObjects.length === 0) {
-      $('#table-all-orders').hide();
+      // $('#table-all-orders').hide();
       $('#article-all-orders').append(`<p class="all-orders-error">There are are no room service orders for this date.</p>`)
     } else {
       $('#table-all-orders').show();
@@ -123,6 +123,7 @@ let domUpdates = {
     $('.tr__available-rooms-header').html('');
     $('.tr__available-rooms, #show-available-rooms').hide();
     $('#button__filter-room-type').show();
+    // $('#table-available-rooms').show();
     $('#table-available-rooms').append(
       `<tr class="tr__available-rooms-header">
         <th>Room Number</th>
@@ -146,14 +147,13 @@ let domUpdates = {
   },
 
   displayBookingInquiry(targetRoom) {
-    $('#button__filter-room-type').hide();
     $('#booking-room-number').text(targetRoom.number);
     $('#booking-dollar-amount').text(targetRoom.costPerNight);
     $('#p__booking-text, #button-confirm-booking').show();
   },
 
   displayCustomerBookingsBreakdown(currentCustomer) {
-    $('#button-confirm-booking, #p__booking-text').hide();
+    $('#button-confirm-booking, #p__booking-text, #button__filter-room-type').hide();
     $('#table-bookings-breakdown').html('');
     $('#p__booking-name').text(currentCustomer.name);
     if (currentCustomer.bookings.length === 0) {
@@ -201,7 +201,7 @@ let domUpdates = {
     $('#p__room-service-text, #button-confirm-room-service, #p__room-service-total, .rooms-content-container').hide();
     $('#confirm-room-service-text').append(
       `<p class="p__room-service-confirmation">Room service for ${customer.name} has been submitted. Thank you!</p>
-      <button class="button__main-menu" id="button__main-menu" onClick="window.location.reload()">Return to the main menu</button>`)
+      <button class="button__main-menu" id="button__main-menu" onClick="location.reload()">Return to the main menu</button>`)
   }, 
 
   displayAllRoomsAvailableByDate(roomsAvailable) {
