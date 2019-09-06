@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,400,500,600,700,800&display=swap" rel="stylesheet">
+    <title>OverLook Hotel</title>
+  </head>
+  <body>
+    <header>
+      <h1>OverLook</h1>
+      <div class="current-date" id="current-date"></div>
+    </header>
+    <nav class="tabs">
+      <button class="tab" id="tab-main">Main</button>
+      <button class="tab" id="tab-customer">Customer</button>
+      <button class="tab" id="tab-orders">Orders</button>
+      <button class="tab" id="tab-rooms">Rooms</button>
+    </nav>
+    <main>
+      <section class="content" id="content-main">
+        <p class="current-customer">Current Customer: <span id="current-customer-name1"></span></p>
+        <div class="content-container">
+          <article class="article-main">
+            <p class="main__p">Total Revenue:</p>
+            <p class="main-totals" id="main-total-revenue">$</p>
+          </article>
+          <article class="article-main">
+            <p class="main__p">Precentage of Rooms Occupied:</p>
+            <p class="main-totals" id="main-occupied-rooms"></p>
+          </article>
+          <article class="article-main">
+            <p class="main__p">Total Rooms Available:</p>
+            <p class="main-totals" id="main-available-rooms"></p>
+          </article>
+        </div>
+      </section>
+      <section class="content" id="content-customer">
+        <p class="current-customer">Current Customer: <span id="current-customer-name2"></span></p>
+        <div class="content-container">
+          <article class="article-customer">
+            <p class="customer__p">Search Our Database for an Exisiting Customer!</p>
+            <input type="text" class="article__input" id="input-search-customer" placeholder="Full Name" autocomplete="off">
+            <button class="button-customer" id="button-search-customer">Search For Customer</button>
+            <p class="error-search-customer" id="error-search-customer"></p>
+          </article>
+          <article class="article-customer">
+            <p class="customer__p">Create A New Customer!</p>
+            <input type="text" class="article__input" id="input-create-customer" placeholder="Full Name">
+            <button class="button-customer" id="button-create-customer">Create New Customer</button>
+          </article>
+        </div>
+      </section>
+      <section class="content" id="content-orders">
+        <p class="current-customer">Current Customer: <span id="current-customer-name3"></span></p>
+        <div class="content-container">
+          <article class="article-orders">
+            <p class="orders__p">Total Orders Today:</p>
+            <div class="article-all-orders" id="article-all-orders">
+            </div>
+            <input type="text" class="article__input" id="input-all-orders" placeholder="yyyy/mm/dd">
+            <button class="button-customer" id="button-all-orders">Search By Date</button>
+          </article>
+          <article class="article-orders customer-orders-article">
+            <p class="orders__p">Customer Specific Info:</p>
+            <div class="article-customer-orders" id="article-customer-orders">
+            </div>
+            <p class="customer-orders-total" id="customer-orders-total">Customer's Total Room Service Debt: <br><span class="customer-orders-total-number"></span></p>
+          </article>
+        </div>
+      </section>
+      <section class="content" id="content-rooms">
+        <p class="current-customer">Current Customer: <span id="current-customer-name4"></span></p>
+        <div class="content-container all-rooms-container">
+          <article class="article-all-rooms1">
+            <p class="p__rooms">Most Popular Booking Date:</p>
+            <span class="most-least-popular-date" id="most-popular-date"></span>
+            <p class="p__rooms">Most Rooms Available:</p>
+            <span class="most-least-popular-date" id="least-popular-date"></span>
+          </article>
+          <article class="article-all-rooms2">
+            <table class="table__all-rooms-by-date" id="table__all-rooms-by-date"></table>
+          </article>
+        </div>
+        <div class="search-rooms-available-container">
+          <input type="text" class="input__all-rooms-available" id="input__all-rooms-available" placeholder="yyyy/mm/dd">
+          <button class="button__all-rooms-available" id="button__all-rooms-available">Search Available Rooms By Date</button>
+        </div>
+        <div class="rooms-content-container">
+          <article class="article-rooms1" id="bookings-breakdown">
+            <p class="p__bookings-breakdown">Breakdown for <span id="p__booking-name"></span>'s Bookings:</p>
+            <div class="bookings-breakdown-error" id="bookings-breakdown-error""></div>
+            <table class="table-bookings-breakdown" id="table-bookings-breakdown"></table>
+          </article>
+          <article class="article-rooms2" id="article-rooms">
+            <table class="table-available-rooms" id="table-available-rooms"></table>
+            <table class="table-room-service-menu" id="table-room-service-menu"></table>
+            <form class="form__all-rooms">
+              <input type="radio" name="room-type" data-id="single room"> Single Room<br>
+              <input type="radio" name="room-type" data-id="junior suite"> Junior Suite<br>
+              <input type="radio" name="room-type" data-id="residential suite"> Residential Suite<br>
+              <input type="radio" name="room-type" data-id="suite"> Suite<br>
+              <input type="radio" name="room-type" data-id="all"> See All Room Types<br>
+            </form>
+          </article>
+        </div>
+        <div class="booking-inquiry-container">
+          <button class="show-available-rooms" id="show-available-rooms">Show All Available Rooms</button>
+          <button class="button__filter-room-type" id="button__filter-room-type">Filter By Room Type</button>
+          <p class="p__confirmation-text" id="p__booking-text">Would you like to confirm your booking of room <span id="booking-room-number"></span> for $<span id="booking-dollar-amount"></span>?</p>
+          <button class="button-confirmation" id="button-confirm-booking">Confirm Booking</button>
+          <p class="p__confirmation-text" id="p__room-service-text">Please select room service items for an additional cost.</p>
+          <button class="button-confirmation" id="button-confirm-room-service">Confirm Room Service Purchase</button>
+          <p class="p__confirmation-text" id="p__room-service-total">Your current room service total is: $<span id="room-service-total-number">0.00</span></p>
+          <div class="confirm-room-service-text" id="confirm-room-service-text"></div>
+        </div>
+      </section>
+    </main>
+  <script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
